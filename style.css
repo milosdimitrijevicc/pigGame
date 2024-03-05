@@ -105,24 +105,30 @@ h4{
 .dice1{
     background-image: url(./img/Dice-1.svg.png);
     background-size: cover;
+    z-index: -1;
 }
 .dice2{
     background-image: url(./img/Dice-2.svg.png);
     background-size: cover;
+    z-index: -1;
 }
 .dice3{
     background-image: url(./img/Dice-3.svg.png);
     background-size: cover;
+    z-index: -1;
 }
 .dice4{
     background-image: url(./img/Dice-4.svg.png);
     background-size: cover;
+    z-index: -1;
 }
 .dice5{
     background-image: url(./img/Dice-5.svg.png);
     background-size: cover;
+    z-index: -1;
 }
 .dice6{
     background-image: url(./img/Dice-6.svg.png);
     background-size: cover;
+    z-index: -1;
 }

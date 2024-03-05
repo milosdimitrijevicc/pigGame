@@ -15,5 +15,81 @@ const dice4 = 4;
 const dice5 = 5;
 const dice6 = 6;
 
+const dice1Active = () => {
+  document.querySelector('.dice1').style.zIndex = "2";
+  document.querySelector('.dice2').style.zIndex = "-1";
+  document.querySelector('.dice3').style.zIndex = "-1";
+  document.querySelector('.dice4').style.zIndex = "-1";
+  document.querySelector('.dice5').style.zIndex = "-1";
+  document.querySelector('.dice6').style.zIndex = "-1";
+}
+const dice2Active = () => {
+  document.querySelector('.dice1').style.zIndex = "-1";
+  document.querySelector('.dice2').style.zIndex = "2";
+  document.querySelector('.dice3').style.zIndex = "-1";
+  document.querySelector('.dice4').style.zIndex = "-1";
+  document.querySelector('.dice5').style.zIndex = "-1";
+  document.querySelector('.dice6').style.zIndex = "-1";
+}
+const dice3Active = () => {
+  document.querySelector('.dice1').style.zIndex = "-1";
+  document.querySelector('.dice2').style.zIndex = "-1";
+  document.querySelector('.dice3').style.zIndex = "2";
+  document.querySelector('.dice4').style.zIndex = "-1";
+  document.querySelector('.dice5').style.zIndex = "-1";
+  document.querySelector('.dice6').style.zIndex = "-1";
+}
+const dice4Active = () => {
+  document.querySelector('.dice1').style.zIndex = "-1";
+  document.querySelector('.dice2').style.zIndex = "-1";
+  document.querySelector('.dice3').style.zIndex = "-1";
+  document.querySelector('.dice4').style.zIndex = "2";
+  document.querySelector('.dice5').style.zIndex = "-1";
+  document.querySelector('.dice6').style.zIndex = "-1";
+}
+const dice5Active = () => {
+  document.querySelector('.dice1').style.zIndex = "-1";
+  document.querySelector('.dice2').style.zIndex = "-1";
+  document.querySelector('.dice3').style.zIndex = "-1";
+  document.querySelector('.dice4').style.zIndex = "-1";
+  document.querySelector('.dice5').style.zIndex = "2";
+  document.querySelector('.dice6').style.zIndex = "-1";
+}
+const dice6Active = () => {
+  document.querySelector('.dice1').style.zIndex = "-1";
+  document.querySelector('.dice2').style.zIndex = "-1";
+  document.querySelector('.dice3').style.zIndex = "-1";
+  document.querySelector('.dice4').style.zIndex = "-1";
+  document.querySelector('.dice5').style.zIndex = "-1";
+  document.querySelector('.dice6').style.zIndex = "2";
+}
+
+
+// Start Game
+document.querySelector('.btnRollDice').addEventListener('click' , function(){
+
+  let randomDice = Math.floor(Math.random() * 6) + 1;
+  
+  if (randomDice === 1) {
+    console.log('Dice 1');
+    dice1Active();
+  } else if (randomDice === 2) {
+    console.log('Dice 2');
+    dice2Active();
+  } else if (randomDice === 3) {
+    console.log('Dice 3');
+    dice3Active();
+  } else if (randomDice === 4) {
+    console.log('Dice 4');
+    dice4Active();
+  } else if (randomDice === 5) {
+    console.log('Dice 5');
+    dice5Active();
+  } else if (randomDice === 6) {
+    console.log('Dice 6');
+    dice6Active();
+  }
+
+});
 
 
