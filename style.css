@@ -93,3 +93,36 @@ h4{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+/* Dices */
+.dices{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+}
+.dice1{
+    background-image: url(./img/Dice-1.svg.png);
+    background-size: cover;
+}
+.dice2{
+    background-image: url(./img/Dice-2.svg.png);
+    background-size: cover;
+}
+.dice3{
+    background-image: url(./img/Dice-3.svg.png);
+    background-size: cover;
+}
+.dice4{
+    background-image: url(./img/Dice-4.svg.png);
+    background-size: cover;
+}
+.dice5{
+    background-image: url(./img/Dice-5.svg.png);
+    background-size: cover;
+}
+.dice6{
+    background-image: url(./img/Dice-6.svg.png);
+    background-size: cover;
+}
