@@ -10,7 +10,9 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 //Dice
 const diceImg = document.querySelector('.dice');
-
+//Player 1
+const player1Wrapper = document.querySelector('.player--1');
+const player2Wrapper = document.querySelector('.player--2');
 
 
 //GAME LOGIC STATE
@@ -91,6 +93,7 @@ btnRoll.addEventListener('click' , function(){
 
   if (game.getActivePlayer() === 'player1') { //STARTNA POZICIJA 
     
+    
     if (rollDice !== 1) { //AKO PLAYER 1 NIJE ROLAO 1 IGRA
 
       rollDice; //BACA SE KOCKICA I DOBIJA SE RANDOM BROJ OD 1 DO 6
@@ -104,20 +107,25 @@ btnRoll.addEventListener('click' , function(){
         game.setPlayer1TotalScore(game.getPlayer1CurrentScore());
         ui.setPlayer1TotalScoreEl(game.getPlayer1TotalScore());
         game.setPlayer1CurrentScoreReset(); //KADA PLAYER 1 IZVUCE 1 NJEGOV SCORE SE VRACA NA 0
-        ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()) //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 1 = 0
+        ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()); //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 1 = 0
         game.setActivePlayer('player2'); //SADA IGRA PLAYER 2
+        player2Wrapper.classList.add('player--active');
+        player1Wrapper.classList.remove('player--active');
       })
 
     } else {
       console.log(`💥Player 1 rolled 1💥`); 
       game.setPlayer1CurrentScoreReset(); //KADA PLAYER 1 IZVUCE 1 NJEGOV SCORE SE VRACA NA 0
       console.log(`Player 1 score = ${game.getPlayer1CurrentScore()}`);
-      ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()) //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 1 = 0
+      ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()); //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 1 = 0
       game.setActivePlayer('player2'); //SADA IGRA PLAYER 2
+      player2Wrapper.classList.add('player--active');
+      player1Wrapper.classList.remove('player--active');
     } 
 
   
   } else if (game.getActivePlayer() === 'player2') { //SADA IGRA PLAYER 2
+
 
     if (rollDice !== 1) {
 
@@ -134,6 +142,8 @@ btnRoll.addEventListener('click' , function(){
         game.setPlayer2CurrentScoreReset(); //KADA PLAYER 2 IZVUCE 1 NJEGOV SCORE SE VRACA NA 0
         ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore()) //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 2 = 0
         game.setActivePlayer('player1'); //SADA IGRA PLAYER 1
+        player1Wrapper.classList.add('player--active');
+        player2Wrapper.classList.remove('player--active');
       })
 
     } else {
@@ -142,12 +152,15 @@ btnRoll.addEventListener('click' , function(){
       console.log(`Player 2 score = ${game.getPlayer2CurrentScore()}`);
       ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore())
       game.setActivePlayer('player1');
+      player1Wrapper.classList.add('player--active');
+      player2Wrapper.classList.remove('player--active');
     }
 
   }
 });
 
 
+//NEW GAME
 btnNewGame.addEventListener('click' , function(){
   game.setPlayer1CurrentScoreReset();
   game.setPlayer2CurrentScoreReset();
@@ -158,4 +171,11 @@ btnNewGame.addEventListener('click' , function(){
   ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore());
   ui.setPlayer1TotalScoreEl(game.getPlayer1TotalScore());
   ui.setPlayer2TotalScoreEl(game.getPlayer2TotalScore());
+
+  game.setActivePlayer('player1');
+  player1Wrapper.classList.add('player--active');
+  player2Wrapper.classList.remove('player--active');
 })
+
+
+
