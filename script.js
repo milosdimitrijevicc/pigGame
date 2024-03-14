@@ -8,8 +8,8 @@ const player2TotalScoreEl = document.querySelector('#score--2');
 const btnNewGame = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
-
-
+//Dice
+const diceImg = document.querySelector('.dice');
 
 
 
@@ -40,6 +40,8 @@ const gameCreator = () => {
   const setActivePlayer = (value) => activePlayer = value;
   const setPlayer1CurrentScoreReset = () => player1CurrentScore = 0;
   const setPlayer2CurrentScoreReset = () => player2CurrentScore = 0;
+  const setPlayer1TotalScoreReset = () => player1TotalScore = 0;
+  const setPlayer2TotalScoreReset = () => player2TotalScore = 0;
 
   
 
@@ -48,30 +50,29 @@ const gameCreator = () => {
 
   }
 
-  return {getPlayer1CurrentScore, getPlayer2CurrentScore, getPlayer1TotalScore, getPlayer2TotalScore, getBtnNewGame, getBtnRoll, getHold, setPlayer1CurrentScore, setPlayer2CurrentScore, setPlayer1TotalScore, setPlayer2TotalScore, getActivePlayer, setActivePlayer, displayPlayer1CurrentScore, setPlayer1CurrentScoreReset, setPlayer2CurrentScoreReset};
+  return {getPlayer1CurrentScore, getPlayer2CurrentScore, getPlayer1TotalScore, getPlayer2TotalScore, getBtnNewGame, getBtnRoll, getHold, setPlayer1CurrentScore, setPlayer2CurrentScore, setPlayer1TotalScore, setPlayer2TotalScore, getActivePlayer, setActivePlayer, displayPlayer1CurrentScore, setPlayer1CurrentScoreReset, setPlayer2CurrentScoreReset, setPlayer1TotalScoreReset, setPlayer2TotalScoreReset};
 }
-
-
-
-
 
 
 //GAME UI STATE 
 const gameUI = () => {
 
-  //Player 1
+  //Player 1 Current Score
   const getPlayer1CurrentScoreEl = () => player1CurrentScoreEl;
   const setPlayer1CurrentScoreEl = (value) => player1CurrentScoreEl.textContent = value;
-  //Player 2
+  //Player 2 Current Score
   const getPlayer2CurrentScoreEl = () => player2CurrentScoreEl;
   const setPlayer2CurrentScoreEl = (value) => player2CurrentScoreEl.textContent = value;
 
+  //Player 1 Total Score
+  const getPlayer1TotalScoreEl = () => player1TotalScoreEl;
+  const setPlayer1TotalScoreEl = (value) => player1TotalScoreEl.textContent = value;
+  //Player 2 Total Score 
+  const getPlayer2TotalScoreEl = () => player2TotalScoreEl;
+  const setPlayer2TotalScoreEl = (value) => player2TotalScoreEl.textContent = value;
   
-  return {getPlayer1CurrentScoreEl, setPlayer1CurrentScoreEl, getPlayer2CurrentScoreEl,setPlayer2CurrentScoreEl}
+  return {getPlayer1CurrentScoreEl, setPlayer1CurrentScoreEl, getPlayer2CurrentScoreEl,setPlayer2CurrentScoreEl, getPlayer1TotalScoreEl, setPlayer1TotalScoreEl, getPlayer2TotalScoreEl, setPlayer2TotalScoreEl}
 }
-
-
-
 
 
 //CALLING STATES
@@ -82,10 +83,11 @@ const ui = gameUI();
 
 
 
-
+//ROLLING DICE
 btnRoll.addEventListener('click' , function(){
   
   let rollDice = Math.floor((Math.random() * 6) +1);
+  diceImg.src = `./dice-${rollDice}.png`; //SLIKA KOCKICE SE MENJA U ZAVISNOSTI OD BROJA KOJI IZRACUNA MATH.RANDOM
 
   if (game.getActivePlayer() === 'player1') { //STARTNA POZICIJA 
     
@@ -97,13 +99,22 @@ btnRoll.addEventListener('click' , function(){
       console.log(`Player 1 current score = ${game.getPlayer1CurrentScore()}`);
       ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()); //SABRANI BROJ SE UPISUJE U IGRU KAKO BI IGRAC VIDEO KOLIKO IMA POENA
 
+      //HOLDING CURRENT SCORE PLAYER 1
+      btnHold.addEventListener('click' , function(){
+        game.setPlayer1TotalScore(game.getPlayer1CurrentScore());
+        ui.setPlayer1TotalScoreEl(game.getPlayer1TotalScore());
+        game.setPlayer1CurrentScoreReset(); //KADA PLAYER 1 IZVUCE 1 NJEGOV SCORE SE VRACA NA 0
+        ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()) //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 1 = 0
+        game.setActivePlayer('player2'); //SADA IGRA PLAYER 2
+      })
+
     } else {
       console.log(`💥Player 1 rolled 1💥`); 
       game.setPlayer1CurrentScoreReset(); //KADA PLAYER 1 IZVUCE 1 NJEGOV SCORE SE VRACA NA 0
       console.log(`Player 1 score = ${game.getPlayer1CurrentScore()}`);
       ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()) //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 1 = 0
       game.setActivePlayer('player2'); //SADA IGRA PLAYER 2
-    }
+    } 
 
   
   } else if (game.getActivePlayer() === 'player2') { //SADA IGRA PLAYER 2
@@ -116,6 +127,14 @@ btnRoll.addEventListener('click' , function(){
       console.log(`Player 2 current score = ${game.getPlayer2CurrentScore()}`);
       ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore());
 
+       //HOLDING CURRENT SCORE PLAYER 2
+       btnHold.addEventListener('click' , function(){
+        game.setPlayer2TotalScore(game.getPlayer2CurrentScore());
+        ui.setPlayer2TotalScoreEl(game.getPlayer2TotalScore());
+        game.setPlayer2CurrentScoreReset(); //KADA PLAYER 2 IZVUCE 1 NJEGOV SCORE SE VRACA NA 0
+        ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore()) //PRIKAZUJE SE NA EKRANU DA JE SCORE PLAYERA 2 = 0
+        game.setActivePlayer('player1'); //SADA IGRA PLAYER 1
+      })
 
     } else {
       console.log(`💥Player 2 rolled 1💥`);
@@ -126,6 +145,17 @@ btnRoll.addEventListener('click' , function(){
     }
 
   }
-  
-  
+});
+
+
+btnNewGame.addEventListener('click' , function(){
+  game.setPlayer1CurrentScoreReset();
+  game.setPlayer2CurrentScoreReset();
+  game.setPlayer1TotalScoreReset();
+  game.setPlayer2TotalScoreReset();
+
+  ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore());
+  ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore());
+  ui.setPlayer1TotalScoreEl(game.getPlayer1TotalScore());
+  ui.setPlayer2TotalScoreEl(game.getPlayer2TotalScore());
 })
