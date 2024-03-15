@@ -93,14 +93,21 @@ btnRoll.addEventListener('click' , function(){
 
   if (game.getActivePlayer() === 'player1') { //STARTNA POZICIJA 
     
-    
     if (rollDice !== 1) { //AKO PLAYER 1 NIJE ROLAO 1 IGRA
 
-      rollDice; //BACA SE KOCKICA I DOBIJA SE RANDOM BROJ OD 1 DO 6
+      // rollDice; //BACA SE KOCKICA I DOBIJA SE RANDOM BROJ OD 1 DO 6
       console.log(`Player 1 rolled ${rollDice}`); 
       game.setPlayer1CurrentScore(rollDice); //PLAYER 1 SCORE JE NA POCETKU 0 I SAD MU SE DODAJE BROJ SA KOCKICE 
       console.log(`Player 1 current score = ${game.getPlayer1CurrentScore()}`);
       ui.setPlayer1CurrentScoreEl(game.getPlayer1CurrentScore()); //SABRANI BROJ SE UPISUJE U IGRU KAKO BI IGRAC VIDEO KOLIKO IMA POENA
+
+      if (game.getPlayer1CurrentScore() + game.getPlayer1TotalScore() >= 50) {
+        game.setPlayer1TotalScore(game.getPlayer1CurrentScore());
+        ui.setPlayer1TotalScoreEl(game.getPlayer1TotalScore())
+        player1Wrapper.classList.add('player--winner');
+        btnRoll.disabled = true;
+        btnHold.disabled = true;
+      } 
 
       //HOLDING CURRENT SCORE PLAYER 1
       btnHold.addEventListener('click' , function(){
@@ -125,8 +132,7 @@ btnRoll.addEventListener('click' , function(){
 
   
   } else if (game.getActivePlayer() === 'player2') { //SADA IGRA PLAYER 2
-
-
+  
     if (rollDice !== 1) {
 
       rollDice;
@@ -134,6 +140,14 @@ btnRoll.addEventListener('click' , function(){
       game.setPlayer2CurrentScore(rollDice);
       console.log(`Player 2 current score = ${game.getPlayer2CurrentScore()}`);
       ui.setPlayer2CurrentScoreEl(game.getPlayer2CurrentScore());
+
+      if (game.getPlayer2CurrentScore() + game.getPlayer2TotalScore() >= 50) {
+        game.setPlayer2TotalScore(game.getPlayer2CurrentScore());
+        ui.setPlayer2TotalScoreEl(game.getPlayer2TotalScore())
+        player2Wrapper.classList.add('player--winner');
+        btnRoll.disabled = true;
+        btnHold.disabled = true;
+      }
 
        //HOLDING CURRENT SCORE PLAYER 2
        btnHold.addEventListener('click' , function(){
@@ -173,9 +187,11 @@ btnNewGame.addEventListener('click' , function(){
   ui.setPlayer2TotalScoreEl(game.getPlayer2TotalScore());
 
   game.setActivePlayer('player1');
+  player2Wrapper.classList.remove('player--winner');
+  player1Wrapper.classList.remove('player--winner');
   player1Wrapper.classList.add('player--active');
-  player2Wrapper.classList.remove('player--active');
+  player2Wrapper.classList.remove('player--active');  
+
+  btnHold.disabled = false;
+  btnRoll.disabled = false;
 })
-
-
-
