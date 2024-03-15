@@ -135,7 +135,7 @@ btnRoll.addEventListener('click' , function(){
   
     if (rollDice !== 1) {
 
-      rollDice;
+      // rollDice;
       console.log(`Player 2 rolled ${rollDice}`);
       game.setPlayer2CurrentScore(rollDice);
       console.log(`Player 2 current score = ${game.getPlayer2CurrentScore()}`);
