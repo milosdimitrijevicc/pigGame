@@ -195,3 +195,16 @@ btnNewGame.addEventListener('click' , function(){
   btnHold.disabled = false;
   btnRoll.disabled = false;
 })
+
+function setTotalScore(playerArgument, score) {
+  // const methodName = `set${playerArgument.charAt(0).toUpperCase() + playerArgument.slice(1)}`;
+  const methodName = `set${playerArgument}TotalScore`
+  game[methodName](score);
+}
+
+
+setTotalScore('Player1', 30);
+console.log(game.getPlayer1TotalScore()); // Output: 30
+
+game.setPlayer1CurrentScore()
+game['setPlayer1CurrentScore']()
